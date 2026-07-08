@@ -14,7 +14,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:isolation": "node -e \"console.log('test:isolation: harness belum dibuat (placeholder T-005). Belum ada tabel/RLS untuk diuji.')\"",
+    "test:isolation": "vitest run --config vitest.isolation.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "supabase": "supabase",
@@ -27,6 +27,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.4",
     "@tailwindcss/postcss": "^4.3.2",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",

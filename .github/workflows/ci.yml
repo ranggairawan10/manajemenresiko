@@ -38,6 +38,23 @@ jobs:
       - name: Build
         run: pnpm build
 
+  test-isolation:
+    name: Tenant isolation (RLS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+      # Postgres asli in-process (pglite) — tidak butuh service container.
+      - name: Tenant isolation tests
+        run: pnpm test:isolation
+
   secret-scan:
     name: Secret scan (gitleaks)
     runs-on: ubuntu-latest
