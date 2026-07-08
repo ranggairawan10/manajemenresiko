@@ -1,0 +1,18 @@
+-- =============================================================================
+-- Migrasi baseline (T-003) — SENGAJA KOSONG (tanpa objek skema apa pun).
+-- =============================================================================
+-- Tujuan:
+--   Membuktikan pipeline migrasi (supabase link + supabase db push) berjalan
+--   sebelum skema domain diperkenalkan.
+--
+-- Konvensi penomoran:
+--   Nama file = <YYYYMMDDHHMMSS>_<slug>.sql (UTC), dihasilkan oleh
+--   `supabase migration new <slug>`. Migrasi dijalankan berurutan menaik
+--   berdasarkan prefix timestamp; JANGAN mengubah/menghapus migrasi yang sudah
+--   ada di main — selalu buat migrasi baru (lihat CLAUDE.md).
+--
+-- Tabel domain dimulai di T-010 (identitas: tenants, profiles, invitations) dst.
+-- Setiap tabel domain WAJIB: RLS enabled + FORCE + policy + test isolasi, dan
+-- perubahan skema WAJIB disertai down-migration. Karena file ini tidak membuat
+-- objek apa pun, tidak ada down-migration yang diperlukan.
+-- =============================================================================

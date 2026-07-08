@@ -16,7 +16,10 @@
     "test:watch": "vitest",
     "test:isolation": "node -e \"console.log('test:isolation: harness belum dibuat (placeholder T-005). Belum ada tabel/RLS untuk diuji.')\"",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "supabase": "supabase",
+    "db:push": "supabase db push",
+    "db:new": "supabase migration new"
   },
   "dependencies": {
     "next": "^15.1.6",
@@ -33,6 +36,7 @@
     "eslint-config-prettier": "^9.1.0",
     "postcss": "^8.5.16",
     "prettier": "^3.4.2",
+    "supabase": "^2.109.0",
     "tailwindcss": "^4.3.2",
     "typescript": "^5.7.3",
     "vitest": "^2.1.8"
