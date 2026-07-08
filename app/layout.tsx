@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import './globals.css';
+import { plusJakartaSans } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Manajemen Resiko',
@@ -8,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="id" className={plusJakartaSans.variable}>
       <body>{children}</body>
     </html>
   );
