@@ -1,0 +1,10 @@
+.next/
+node_modules/
+coverage/
+pnpm-lock.yaml
+public/fonts/
+*.ttf
+
+# Dokumen sumber kebenaran & markdown dikelola manual, di luar cakupan Prettier
+*.md
+docs/

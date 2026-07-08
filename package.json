@@ -1,0 +1,37 @@
+{
+  "name": "manajemen-resiko",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.10.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:isolation": "node -e \"console.log('test:isolation: harness belum dibuat (placeholder T-005). Belum ada tabel/RLS untuk diuji.')\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.1.6",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  }
+}
