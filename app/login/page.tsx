@@ -16,9 +16,9 @@ const ERROR_MESSAGES: Record<string, string> = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; sent?: string }>;
+  searchParams: Promise<{ error?: string; sent?: string; accepted?: string }>;
 }) {
-  const { error, sent } = await searchParams;
+  const { error, sent, accepted } = await searchParams;
   const errorMessage = error ? (ERROR_MESSAGES[error] ?? 'Terjadi kesalahan.') : null;
 
   return (
@@ -37,6 +37,11 @@ export default async function LoginPage({
       {sent && (
         <p className="rounded-md bg-success-tint px-4 py-3 text-sm text-success-deep" role="status">
           Tautan masuk telah dikirim ke email Anda (berlaku sementara).
+        </p>
+      )}
+      {accepted && (
+        <p className="rounded-md bg-success-tint px-4 py-3 text-sm text-success-deep" role="status">
+          Akun berhasil dibuat. Silakan masuk.
         </p>
       )}
 

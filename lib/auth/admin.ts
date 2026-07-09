@@ -21,3 +21,20 @@ export async function requireAdminPlatform(): Promise<SessionContext> {
   if (ctx.claims?.role !== 'admin_platform') redirect('/sesi');
   return ctx;
 }
+
+/** Guard admin_tenant: login + MFA (AAL2) + peran admin_tenant. */
+export async function requireAdminTenant(): Promise<SessionContext> {
+  const ctx = await getSessionContext();
+  if (!ctx.user) redirect('/login');
+
+  const gate = evaluateMfaGate({
+    role: ctx.claims?.role ?? null,
+    hasVerifiedFactor: ctx.hasVerifiedFactor,
+    currentLevel: ctx.currentLevel,
+  });
+  if (gate === 'enroll') redirect('/mfa/enroll');
+  if (gate === 'verify') redirect('/mfa/verify');
+
+  if (ctx.claims?.role !== 'admin_tenant') redirect('/sesi');
+  return ctx;
+}
