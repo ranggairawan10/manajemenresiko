@@ -1,40 +1,12 @@
-import { redirect } from 'next/navigation';
-import { getSessionContext, type SessionContext } from '@/lib/auth/session';
-import { evaluateMfaGate } from '@/lib/auth/mfa';
+import { requireRole } from '@/lib/auth/guard';
+import type { SessionContext } from '@/lib/auth/session';
 
-/**
- * Guard halaman/aksi admin_platform: wajib login, wajib MFA (AAL2), dan peran
- * admin_platform. RLS tetap menjadi lapis penegakan terakhir di database.
- */
-export async function requireAdminPlatform(): Promise<SessionContext> {
-  const ctx = await getSessionContext();
-  if (!ctx.user) redirect('/login');
-
-  const gate = evaluateMfaGate({
-    role: ctx.claims?.role ?? null,
-    hasVerifiedFactor: ctx.hasVerifiedFactor,
-    currentLevel: ctx.currentLevel,
-  });
-  if (gate === 'enroll') redirect('/mfa/enroll');
-  if (gate === 'verify') redirect('/mfa/verify');
-
-  if (ctx.claims?.role !== 'admin_platform') redirect('/sesi');
-  return ctx;
+/** Guard admin_platform: login + MFA (AAL2) + peran. RLS = lapis terakhir. */
+export function requireAdminPlatform(): Promise<SessionContext> {
+  return requireRole(['admin_platform']);
 }
 
-/** Guard admin_tenant: login + MFA (AAL2) + peran admin_tenant. */
-export async function requireAdminTenant(): Promise<SessionContext> {
-  const ctx = await getSessionContext();
-  if (!ctx.user) redirect('/login');
-
-  const gate = evaluateMfaGate({
-    role: ctx.claims?.role ?? null,
-    hasVerifiedFactor: ctx.hasVerifiedFactor,
-    currentLevel: ctx.currentLevel,
-  });
-  if (gate === 'enroll') redirect('/mfa/enroll');
-  if (gate === 'verify') redirect('/mfa/verify');
-
-  if (ctx.claims?.role !== 'admin_tenant') redirect('/sesi');
-  return ctx;
+/** Guard admin_tenant: login + MFA (AAL2) + peran. */
+export function requireAdminTenant(): Promise<SessionContext> {
+  return requireRole(['admin_tenant']);
 }
