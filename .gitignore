@@ -7,3 +7,8 @@ node_modules/
 .DS_Store
 supabase/.temp/
 coverage/
+
+# build artifacts
+*.tsbuildinfo
+next-env.d.ts
+.vercel/
