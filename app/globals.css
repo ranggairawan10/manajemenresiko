@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+
+/*
+ * =============================================================================
+ * Manajemen Resiko Design System v5.2 — SATU-SATUNYA SUMBER TOKEN
+ * =============================================================================
+ * Sumber kebenaran nilai: docs/design/manajemen-resiko-design-system.html (v5.2).
+ * Perubahan token WAJIB lewat file HTML itu dulu (seksi Tata Kelola), lalu
+ * disalin ke sini. DILARANG hardcode hex/radius/shadow di komponen —
+ * gunakan utility Tailwind yang dihasilkan dari @theme di bawah.
+ *
+ * Default palette/radius/shadow/font Tailwind sengaja di-reset (`initial`) agar
+ * hanya token Manajemen Resiko yang tersedia sebagai utility.
+ */
+@theme {
+  /* ----- reset scale bawaan Tailwind ----- */
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --font-*: initial;
+
+  /* ----- keyword warna esensial ----- */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* ----- permukaan ----- */
+  --color-bg: #fff;
+  --color-surface: #fff;
+  --color-surface-2: #f9fafb;
+  --color-surface-3: #eef3f5;
+
+  /* ----- netral ----- */
+  --color-n0: #fff;
+  --color-n50: #f9fafb;
+  --color-n100: #eef3f5;
+  --color-n200: #e3eaee;
+  --color-n300: #d2dde2;
+  --color-n400: #aab9c0;
+  --color-n500: #88979f;
+  --color-n600: #61727a;
+  --color-n700: #455257;
+  --color-n800: #2a3338;
+  --color-n900: #161d21;
+
+  /* ----- garis & teks (ink) ----- */
+  --color-border: #e3eaee;
+  --color-border-strong: #d2dde2;
+  --color-ink: #0a3d62;
+  --color-ink-2: #3e5a6e;
+  --color-ink-3: #7c93a1;
+
+  /* ----- brand ----- */
+  --color-navy: #0a3d62;
+  --color-navy-700: #082b47;
+  --color-teal: #0fa3b1; /* aksi primer / status aktif */
+  --color-teal-600: #0c8593;
+  --color-teal-700: #0b6b77;
+  --color-cyan: #1ecad3; /* aksen dekoratif — bukan teks */
+  --color-cyan-600: #14a7b0;
+  --color-cyan-700: #11868e;
+
+  /* ----- tint alpha ----- */
+  --color-teal-10: rgba(15, 163, 177, 0.1);
+  --color-teal-16: rgba(15, 163, 177, 0.16);
+  --color-teal-24: rgba(15, 163, 177, 0.24);
+  --color-cyan-04: rgba(30, 202, 211, 0.04);
+  --color-cyan-08: rgba(30, 202, 211, 0.08);
+  --color-cyan-12: rgba(30, 202, 211, 0.12);
+  --color-cyan-16: rgba(30, 202, 211, 0.16);
+  --color-cyan-24: rgba(30, 202, 211, 0.24);
+
+  /* ----- semantik (dasar / -tint latar / -deep teks di atas tint) ----- */
+  --color-success: #1e9e6a;
+  --color-success-tint: #e7f6ef;
+  --color-success-deep: #15784f;
+  --color-warning: #d9920e;
+  --color-warning-tint: #fbf0d8;
+  --color-warning-deep: #a06b07;
+  --color-danger: #da3b34;
+  --color-danger-tint: #fbeae8;
+  --color-danger-deep: #ae2a24;
+  --color-info: #2d6fe0;
+  --color-info-tint: #e8f0fd;
+  --color-info-deep: #1e54b4;
+  --color-purple: #6d4aed;
+  --color-purple-tint: #eeebfd;
+  --color-purple-deep: #5436c4;
+  --color-slate: #64748b;
+  --color-slate-tint: #eef1f4;
+  --color-slate-deep: #475063;
+
+  /* ----- radius ----- */
+  --radius-xs: 6px;
+  --radius-sm: 9px;
+  --radius-md: 13px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-full: 999px;
+
+  /* ----- elevasi (shadow, basis navy) ----- */
+  --shadow-e1: 0 1px 2px rgba(10, 61, 98, 0.06), 0 1px 3px rgba(10, 61, 98, 0.05);
+  --shadow-e2: 0 6px 16px -6px rgba(10, 61, 98, 0.16), 0 2px 6px rgba(10, 61, 98, 0.06);
+  --shadow-e3: 0 16px 36px -12px rgba(10, 61, 98, 0.22), 0 3px 10px rgba(10, 61, 98, 0.06);
+  --shadow-e-cyan: 0 10px 26px -8px rgba(18, 163, 180, 0.45); /* glow CTA primer */
+
+  /* ----- motion ----- */
+  --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1); /* transisi umum (--ease) */
+  --ease-spring: cubic-bezier(0.34, 1.42, 0.64, 1); /* elemen playful (--spring) */
+
+  /* ----- tipografi ----- */
+  --font-sans: var(--font), system-ui, sans-serif; /* PJS via next/font/local */
+  --font-display: 'Creato Display', var(--font), system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* ----- layout ----- */
+  --container-content: 1200px; /* lebar konten maks -> max-w-content */
+
+  /* ----- transisi default memakai easing brand ----- */
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: var(--ease-smooth);
+}
+
+/*
+ * Gradien dan variabel layout non-utility. Nilai hex hanya boleh hidup di file
+ * token ini, bukan di komponen. Gradien dipakai lewat kelas .bg-grad-* di bawah.
+ */
+:root {
+  --grad-hero: linear-gradient(135deg, #0a3d62 0%, #0e7e96 40%, #0fa3b1 64%, #1ecad3 100%);
+  --grad-vivid: linear-gradient(120deg, #0fa3b1, #1ecad3);
+  --grad-deep: linear-gradient(160deg, #072b47, #0a3d62 48%, #0fa3b1);
+  --grad-soft: linear-gradient(135deg, rgba(30, 202, 211, 0.14), rgba(15, 163, 177, 0.1));
+  --rail: 288px; /* lebar sidebar/rail navigasi */
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  /* Heading memakai letter-spacing negatif sesuai karakter tipografi v5.2 */
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.03em;
+  }
+}
+
+@layer utilities {
+  .bg-grad-hero {
+    background-image: var(--grad-hero);
+  }
+  .bg-grad-vivid {
+    background-image: var(--grad-vivid);
+  }
+  .bg-grad-deep {
+    background-image: var(--grad-deep);
+  }
+  .bg-grad-soft {
+    background-image: var(--grad-soft);
+  }
+  /* Label kecil uppercase: letter-spacing .06em (karakter tipografi v5.2) */
+  .tracking-label {
+    letter-spacing: 0.06em;
+  }
+}
