@@ -14,7 +14,7 @@ Kerjakan berurutan dari atas kecuali dependensi (dep:) menyatakan lain. Setiap t
 ## EPIC 1: Skema inti dan RLS (target: minggu 1)
 
 - [~] T-010 Migrasi identitas: tenants, profiles (role enum), invitations + trigger sync custom claims (tenant_id, user_role) ke JWT. RLS + policy + test isolasi. DoD: klaim muncul di JWT user baru. dep: T-005
-- [ ] T-011 Migrasi taksonomi master: schemes (KKNI 4-7 + FT 6/7), tracks, unit_kompetensi, elemen, kuk, learning_paths, modules, units. Seed 6 skema + 2 track. RLS: read authenticated, write admin_platform. DoD: seed idempotent. dep: T-010
+- [~] T-011 Migrasi taksonomi master: schemes (KKNI 4-7 + FT 6/7), tracks, unit_kompetensi, elemen, kuk, learning_paths, modules, units. Seed 6 skema + 2 track. RLS: read authenticated, write admin_platform. DoD: seed idempotent. dep: T-010
 - [ ] T-012 Migrasi bank soal: questions, question_options (is_correct), exam_blueprints + VIEW soal tanpa is_correct untuk client + policy yang menutup akses langsung question_options dari role client. Test: query client ke is_correct DITOLAK. dep: T-011
 - [ ] T-013 Migrasi aktivitas: enrollments, unit_progress, attempts, attempt_answers + trigger immutable setelah submit. RLS + test isolasi + test immutability. dep: T-011
 - [ ] T-014 Migrasi vault: certificates (nomor_enc terenkripsi kolom via Supabase Vault/pgsodium), refreshment_logs, + audit_log append-only (trigger tolak UPDATE/DELETE) + consents. RLS + test isolasi + test append-only. dep: T-010
