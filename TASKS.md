@@ -5,11 +5,11 @@ Kerjakan berurutan dari atas kecuali dependensi (dep:) menyatakan lain. Setiap t
 
 ## EPIC 0: Fondasi repo dan CI (target: hari 1-3)
 
-- [~] T-001 Init repo: Next.js App Router + TS strict, pnpm, ESLint+Prettier, struktur folder sesuai CLAUDE.md. DoD: `pnpm dev` jalan, halaman placeholder render.
-- [~] T-002 Setup Tailwind theme dari token Design System v5.2 (warna, radius, shadow, easing, font PJS via next/font/local). DoD: halaman demo /styleguide menampilkan token; tidak ada hex hardcode di komponen. dep: T-001
-- [~] T-003 Setup Supabase project (staging) + supabase CLI + migrasi kosong pertama + koneksi env. DoD: `supabase db push` sukses; .env.example lengkap. dep: T-001
-- [~] T-004 CI GitHub Actions: typecheck, lint, unit test, gitleaks (secret scan), npm audit + Dependabot, semgrep dasar. Branch protection: PR wajib review + CI hijau. DoD: PR dummy diblokir saat test gagal. dep: T-001
-- [~] T-005 Harness test isolasi tenant (pgTAP atau vitest+postgres): fixture tenant A/B + user 4 role, helper assertCrossTenantDenied(). Terpasang di CI sebagai job terpisah `test:isolation`. DoD: harness jalan terhadap tabel contoh. dep: T-003, T-004
+- [x] T-001 Init repo: Next.js App Router + TS strict, pnpm, ESLint+Prettier, struktur folder sesuai CLAUDE.md. DoD: `pnpm dev` jalan, halaman placeholder render. (PR #1)
+- [x] T-002 Setup Tailwind theme dari token Design System v5.2 (warna, radius, shadow, easing, font PJS via next/font/local). DoD: halaman demo /styleguide menampilkan token; tidak ada hex hardcode di komponen. dep: T-001 (PR #4)
+- [x] T-003 Setup Supabase project (staging) + supabase CLI + migrasi kosong pertama + koneksi env. DoD: `supabase db push` sukses; .env.example lengkap. dep: T-001 (PR #5)
+- [x] T-004 CI GitHub Actions: typecheck, lint, unit test, gitleaks (secret scan), npm audit + Dependabot, semgrep dasar. Branch protection: PR wajib review + CI hijau. DoD: PR dummy diblokir saat test gagal. dep: T-001 (PR #6)
+- [x] T-005 Harness test isolasi tenant (pgTAP atau vitest+postgres): fixture tenant A/B + user 4 role, helper assertCrossTenantDenied(). Terpasang di CI sebagai job terpisah `test:isolation`. DoD: harness jalan terhadap tabel contoh. dep: T-003, T-004 (PR #7)
 
 ## EPIC 1: Skema inti dan RLS (target: minggu 1)
 
