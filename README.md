@@ -40,3 +40,16 @@ jangan pernah cetak ke log):
 ```bash
 corepack pnpm db:push --db-url "postgresql://postgres.<ref>:<password>@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
 ```
+
+Setiap migrasi skema wajib punya **down migration** di `supabase/down/<ts>_<slug>.sql`
+(rollback manual; tidak dijalankan `db push`) dan **test isolasi** di
+`tests/isolation/` (jalankan `corepack pnpm test:isolation`).
+
+### Custom Access Token Hook (klaim JWT)
+
+Migrasi identitas (T-010) memasang `public.custom_access_token_hook` yang
+menyuntik klaim `tenant_id` & `user_role` dari `profiles` ke JWT. Fungsi ikut
+ter-`db push`, tetapi **enablement hook di project hosted harus diaktifkan
+manual** sekali: Dashboard → Authentication → Hooks → *Custom Access Token* →
+pilih `public.custom_access_token_hook`. (Lokal via `supabase start`, hook
+otomatis dari `config.toml`.)

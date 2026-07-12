@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 import { expect } from 'vitest';
 
@@ -79,13 +81,28 @@ const AUTH_BOOTSTRAP = `
     select nullif(auth.jwt() ->> 'tenant_id', '')::uuid;
   $$;
 
-  do $$ begin
-    if not exists (select 1 from pg_roles where rolname = 'authenticated') then
-      create role authenticated nologin noinherit;
-    end if;
+  -- Role standar yang disediakan platform Supabase (bukan dibuat migrasi kita).
+  do $$
+  declare r text;
+  begin
+    foreach r in array array['anon', 'authenticated', 'service_role', 'supabase_auth_admin']
+    loop
+      if not exists (select 1 from pg_roles where rolname = r) then
+        execute format('create role %I nologin noinherit', r);
+      end if;
+    end loop;
   end $$;
 
-  grant usage on schema auth to authenticated;
+  -- Stub minimal auth.users (di platform nyata disediakan Supabase Auth).
+  create table if not exists auth.users (
+    id                 uuid primary key,
+    email              text,
+    raw_app_meta_data  jsonb not null default '{}'::jsonb,
+    raw_user_meta_data jsonb not null default '{}'::jsonb,
+    created_at         timestamptz not null default now()
+  );
+
+  grant usage on schema auth to anon, authenticated, service_role, supabase_auth_admin;
 `;
 
 export async function createIsolationDb(): Promise<IsolationDb> {
@@ -137,6 +154,21 @@ function usersFor(tenantId: string, prefix: string): Record<UserRole, TestUser> 
     return [role, { id, tenantId, role }] as const;
   });
   return Object.fromEntries(entries) as Record<UserRole, TestUser>;
+}
+
+/**
+ * Terapkan file migrasi domain nyata dari supabase/migrations ke harness.
+ * `suffix` mencocokkan akhiran nama file, mis. 'identity' untuk
+ * `<timestamp>_identity.sql`. Ini memastikan test menguji artefak migrasi yang
+ * benar-benar di-push ke Supabase, bukan salinan yang mudah menyimpang.
+ */
+export async function applyMigration(db: IsolationDb, suffix: string): Promise<void> {
+  const dir = join(process.cwd(), 'supabase', 'migrations');
+  const file = readdirSync(dir).find((f) => f.endsWith(`_${suffix}.sql`));
+  if (!file) {
+    throw new Error(`Migrasi *_${suffix}.sql tidak ditemukan di ${dir}`);
+  }
+  await db.exec(readFileSync(join(dir, file), 'utf8'));
 }
 
 export function makeTenantFixtures(): TenantFixtures {
