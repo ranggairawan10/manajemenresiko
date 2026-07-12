@@ -1,0 +1,12 @@
+# Konfigurasi gitleaks — memperluas ruleset default.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Placeholder & nilai public-by-design (bukan secret)"
+# .env.example hanya berisi placeholder; anon/publishable key adalah kunci
+# publik Supabase (dilindungi RLS), bukan secret. Secret asli tidak pernah
+# di-commit (lihat CLAUDE.md aturan #6).
+paths = [
+  '''\.env\.example$''',
+]
