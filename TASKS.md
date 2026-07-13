@@ -22,7 +22,7 @@ Kerjakan berurutan dari atas kecuali dependensi (dep:) menyatakan lain. Setiap t
 
 ## EPIC 2: F1 Autentikasi dan multi tenant (target: minggu 2)
 
-- [ ] T-020 Auth flow: login email+password, magic link, logout, halaman sesi. Password check panjang >= 12 + rate limit login (middleware IP+akun). dep: T-010
+- [~] T-020 Auth flow: login email+password, magic link, logout, halaman sesi. Password check panjang >= 12 + rate limit login (middleware IP+akun). dep: T-010
 - [ ] T-021 MFA TOTP: enrollment + enforcement wajib untuk admin_tenant/admin_platform saat login. DoD: admin tanpa MFA dipaksa setup sebelum masuk. dep: T-020
 - [ ] T-022 Onboarding tenant: CRUD tenant (admin_platform) + branding (logo, warna aksen via theming layer). dep: T-020
 - [ ] T-023 Undangan: form email tunggal + upload CSV (<= 2MB, validasi, dedup, laporan per baris), token sekali pakai hash + kedaluwarsa 7 hari, halaman accept. Rate limit. DoD: CSV 500 baris < 5 menit. dep: T-022
