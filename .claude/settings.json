@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(pnpm *)",
       "Bash(corepack *)",
@@ -13,10 +14,13 @@
       "Bash(git checkout *)",
       "Bash(git branch *)",
       "Bash(git pull*)",
+      "Bash(git fetch*)",
+      "Bash(git merge *)",
       "Bash(git push origin task/*)",
       "Bash(git push origin chore/*)",
       "Bash(gh pr create *)",
       "Bash(gh pr view *)",
+      "Bash(gh pr checks *)",
       "Bash(gh pr merge *)",
       "Bash(supabase *)",
       "Bash(ls *)",

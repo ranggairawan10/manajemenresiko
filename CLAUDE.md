@@ -38,6 +38,15 @@ Jika kode dan dokumen bertentangan: berhenti, tulis pertanyaan di TASKS.md bagia
 6. Gagal atau butuh keputusan manusia -> tandai [!], tulis di bagian BLOCKED (apa yang dicoba, kenapa buntu, opsi + rekomendasi), lanjut ke task berikutnya yang tidak tergantung.
 7. Maksimal 1 task [~] pada satu waktu.
 
+### Mode FULL AUTONOMOUS (default permanen)
+
+Jalankan tanpa meminta konfirmasi manusia untuk: edit file, commit, push ke branch `task/*` (atau `chore/*`), dan membuka PR. Cukup laporkan hasilnya setelah selesai. Tetap jalankan gate lokal dan Definisi Selesai sebelum commit.
+
+Berhenti dan bertanya HANYA untuk salah satu dari:
+- Hal berlabel BLOCKED (lihat langkah 6): dokumen vs kode bertentangan, keputusan arsitektur yang menyimpang dari ADR, atau buntu teknis.
+- Perintah shell di luar allowlist `.claude/settings.json`.
+- Apa pun yang menyentuh daftar `deny` di `.claude/settings.json`, atau bagian "Yang TIDAK boleh dilakukan tanpa persetujuan manusia" di bawah.
+
 ## Definisi selesai (berlaku untuk SEMUA task)
 
 - Typecheck, lint, unit test hijau; test isolasi hijau bila menyentuh data.
